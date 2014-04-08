@@ -137,7 +137,7 @@ public class MainActivity extends FragmentActivity implements
 		super.onPostCreate(savedInstanceState);
 		drawertoggle.syncState();
 	}
-	
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		// TODO Auto-generated method stub
@@ -159,6 +159,20 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
+			View v = arg1;
+			int n = arg2;
+
+			CourseFragment c = (CourseFragment) getSupportFragmentManager()
+					.findFragmentByTag("CourseFragment");
+			teacherFragment t = (teacherFragment) getSupportFragmentManager()
+					.findFragmentByTag("TeacherFragment");
+
+			if ((c != null && c.isVisible()) || (t != null && t.isVisible())) {
+				Log.i("LANDA", "CourseFragment");
+				
+			getSupportFragmentManager().popBackStack();
+			}
+
 			if (arg2 < drawertitles.length)
 				mViewPager.setCurrentItem(arg2);
 			drawerLayout.closeDrawer(draweList);
@@ -170,7 +184,7 @@ public class MainActivity extends FragmentActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		
+
 		return true;
 	}
 
@@ -178,10 +192,11 @@ public class MainActivity extends FragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		if (drawertoggle.onOptionsItemSelected(item)) {
-	          return true;
-	        }
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -258,7 +273,7 @@ public class MainActivity extends FragmentActivity implements
 				.beginTransaction();
 		transaction
 				.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		transaction.replace(R.id.fragment_container, cf);
+		transaction.replace(R.id.fragment_container, cf, "CourseFragment");
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		transaction.addToBackStack(null);
 		transaction.commit();
@@ -278,7 +293,7 @@ public class MainActivity extends FragmentActivity implements
 		tf.setArguments(extras);
 		FragmentTransaction transaction = getSupportFragmentManager()
 				.beginTransaction();
-		transaction.replace(R.id.fragment_container, tf);
+		transaction.replace(R.id.fragment_container, tf, "TeacherFragment");
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		transaction.addToBackStack(null);
 		transaction.commit();
@@ -313,17 +328,17 @@ public class MainActivity extends FragmentActivity implements
 		}
 
 		@Override
-		public View getView(int arg0, View arg1, ViewGroup arg2) {
-			// TODO Auto-generated method stub
+		public View getView(int position, View arg1, ViewGroup arg2) {
 			View v = arg1;
 			if (v == null) {
 				v = inflater.inflate(R.layout.draweritem, arg2, false);
 				v.setTag(R.id.drawer, v.findViewById(R.id.drawer));
 			}
 			TextView tv = (TextView) v.getTag(R.id.drawer);
-			tv.setText(drawertitles[arg0]);
+			tv.setText(drawertitles[position]);
 
 			return v;
+
 		}
 
 	}
