@@ -3,12 +3,10 @@ package ward.landa;
 import java.util.ArrayList;
 import java.util.List;
 
-import ward.landa.FragmentCourses.OnCourseSelected;
-import android.support.v4.app.Fragment;
 import android.app.Activity;
-import android.content.ClipData.Item;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

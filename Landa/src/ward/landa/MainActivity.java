@@ -17,18 +17,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Menu;
-import android.view.Choreographer.FrameCallback;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -65,7 +60,7 @@ public class MainActivity extends FragmentActivity implements
 
 			@Override
 			public void onDrawerClosed(View drawerView) {
-				// TODO Auto-generated method stub
+
 				super.onDrawerClosed(drawerView);
 				getActionBar().setTitle("Landa");
 				invalidateOptionsMenu();
@@ -73,7 +68,7 @@ public class MainActivity extends FragmentActivity implements
 
 			@Override
 			public void onDrawerOpened(View drawerView) {
-				// TODO Auto-generated method stub
+
 				super.onDrawerOpened(drawerView);
 				getActionBar().setTitle("Navigate to ");
 				invalidateOptionsMenu();
@@ -94,7 +89,7 @@ public class MainActivity extends FragmentActivity implements
 
 			@Override
 			public void onPageSelected(int pos) {
-				// TODO Auto-generated method stub
+				
 				switch (pos) {
 
 				case 0:
@@ -117,13 +112,13 @@ public class MainActivity extends FragmentActivity implements
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
+				
 
 			}
 
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
+				
 
 			}
 		});
@@ -132,7 +127,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		
 
 		super.onPostCreate(savedInstanceState);
 		drawertoggle.syncState();
@@ -140,7 +135,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		// TODO Auto-generated method stub
+		
 		super.onConfigurationChanged(newConfig);
 		drawertoggle.onConfigurationChanged(newConfig);
 	}
@@ -159,8 +154,6 @@ public class MainActivity extends FragmentActivity implements
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			View v = arg1;
-			int n = arg2;
 
 			CourseFragment c = (CourseFragment) getSupportFragmentManager()
 					.findFragmentByTag("CourseFragment");
@@ -190,7 +183,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
+		
 		if (drawertoggle.onOptionsItemSelected(item)) {
 			return true;
 		}
@@ -233,7 +226,7 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
+			//Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
 				return "Updates";
@@ -250,7 +243,7 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public int getItemPosition(Object object) {
-			// TODO Auto-generated method stub
+			
 			return POSITION_NONE;
 		}
 
@@ -311,19 +304,19 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
+			
 			return drawertitles.length;
 		}
 
 		@Override
 		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
+			
 			return drawertitles[arg0];
 		}
 
 		@Override
 		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
+			
 			return arg0;
 		}
 

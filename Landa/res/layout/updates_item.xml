@@ -39,7 +39,7 @@
         android:textStyle="bold"
         android:textColor="#ffffff" />
 
-    <ward.landa.expandableTextView
+    <ward.landa.ExpandableTextView
         android:id="@+id/contentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

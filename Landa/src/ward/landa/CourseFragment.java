@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,13 +25,13 @@ public class CourseFragment extends Fragment {
 	ImageView courseImg;
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
+
 		super.onStart();
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		
 		View root = inflater.inflate(R.layout.fragment_course, null);		
 		Teacher t1=new Teacher(0000, R.drawable.ward, "ward","mail@ward.com","0555","חברתי","CS");
 		Teacher t2=new Teacher(111, R.drawable.mohammed, "Mohammed","mail@mohammed.com","015","","");
@@ -64,32 +63,32 @@ public class CourseFragment extends Fragment {
 		public LayoutInflater inflater;
 
 		public adapter(Context cxt) {
-			// TODO Auto-generated constructor stub
+
 			this.inflater=(LayoutInflater) cxt
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
+			
 			return teachers.size();
 		}
 
 		@Override
 		public Object getItem(int arg0) {
-			// TODO Auto-generated method stub
+			
 			return teachers.get(arg0);
 		}
 
 		@Override
 		public long getItemId(int arg0) {
-			// TODO Auto-generated method stub
+			
 			return teachers.get(arg0).getID();
 		}
 
 		@Override
 		public View getView(int pos, View view, ViewGroup parent) {
-			// TODO Auto-generated method stub
+			
 			View v = view;
 			ImageView picture;
 			TextView name;

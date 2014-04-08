@@ -3,22 +3,19 @@ package ward.landa;
 import java.util.List;
 import java.util.Vector;
 
-import android.support.v4.app.Fragment;
-import android.text.TextUtils.TruncateAt;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils.TruncateAt;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebSettings.TextSize;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class FragmentUpdates extends Fragment {
 
@@ -54,17 +51,16 @@ public class FragmentUpdates extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 
-				
-				int last=l.getLastVisiblePosition();
-				int first=l.getFirstVisiblePosition();
-				View v = l.getChildAt(arg2-first);
-				expandableTextView tv = (expandableTextView) v.findViewById(R.id.contentText);
+				int first = l.getFirstVisiblePosition();
+				View v = l.getChildAt(arg2 - first);
+				ExpandableTextView tv = (ExpandableTextView) v
+						.findViewById(R.id.contentText);
 				if (!tv.isExpanded()) {
 
 					Fx.slideDown(getActivity(), v);
 					tv.setEllipsize(null);
 					tv.setMaxLines(20);
-				tv.setExpanded(true);
+					tv.setExpanded(true);
 
 				} else {
 					Fx.slideUp(getActivity(), v);
@@ -116,7 +112,7 @@ public class FragmentUpdates extends Fragment {
 			View v = convertView;
 			TextView title;
 			TextView time;
-			expandableTextView subject;
+			ExpandableTextView subject;
 			if (v == null) {
 				v = inflater.inflate(R.layout.updates_item, parent, false);
 				v.setTag(R.id.title_update, v.findViewById(R.id.title_update));
@@ -124,7 +120,7 @@ public class FragmentUpdates extends Fragment {
 				v.setTag(R.id.update_time, v.findViewById(R.id.update_time));
 
 			}
-			subject = (expandableTextView) v.getTag(R.id.contentText);
+			subject = (ExpandableTextView) v.getTag(R.id.contentText);
 			title = (TextView) v.getTag(R.id.title_update);
 			subject.setText(updates.get(position).getText());
 			time = (TextView) v.getTag(R.id.update_time);
@@ -132,12 +128,6 @@ public class FragmentUpdates extends Fragment {
 			return v;
 		}
 
-		private int getNumOfLines(String s) {
-			Paint p = new Paint();
-			p.setTextSize(48);
-
-			return (int) p.measureText(s) / (s.length() * 3);
-		}
 
 	}
 }

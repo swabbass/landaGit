@@ -127,7 +127,6 @@ public class FragmentCourses extends Fragment {
 			View v = view;
 			ImageView picture;
 			TextView name;
-			TextView date;
 			RatingBar rb;
 
 			if (v == null) {

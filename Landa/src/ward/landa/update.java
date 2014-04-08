@@ -1,6 +1,5 @@
 package ward.landa;
 
-import android.widget.TextView;
 
 
 
