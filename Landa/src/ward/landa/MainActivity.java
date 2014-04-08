@@ -5,6 +5,7 @@ import java.util.Locale;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -37,6 +38,7 @@ public class MainActivity extends FragmentActivity implements
 	ViewPager mViewPager;
 	PagerTitleStrip strip;
 	DrawerLayout drawerLayout;
+	ActionBarDrawerToggle drawertoggle;
 	ListView draweList;
 	String[] drawertitles;
 
@@ -44,6 +46,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		drawertitles = new String[] { "Updates", "Events", "Teachers",
 				"Courses", "Sign in" };
 
@@ -54,7 +57,24 @@ public class MainActivity extends FragmentActivity implements
 		draweList.setOnItemClickListener(new drawerOnItemClick());
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
-
+		drawertoggle=new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer,R.string.drawer_open , R.string.drawer_close){
+			
+			@Override
+			public void onDrawerClosed(View drawerView) {
+				// TODO Auto-generated method stub
+				super.onDrawerClosed(drawerView);
+				 getActionBar().setTitle("Landa");
+				 invalidateOptionsMenu();
+			}
+			@Override
+			public void onDrawerOpened(View drawerView) {
+				// TODO Auto-generated method stub
+				super.onDrawerOpened(drawerView);
+				getActionBar().setTitle("Navigate to ");
+				invalidateOptionsMenu();
+			}
+		};
+				
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
 
@@ -102,6 +122,14 @@ public class MainActivity extends FragmentActivity implements
 
 	}
 
+		@Override
+		public boolean onPrepareOptionsMenu(Menu menu) {
+			// TODO find the items and in menu and set it !drawerOpen
+			
+			boolean draweOpen=drawerLayout.isDrawerOpen(draweList);
+		
+			return super.onPrepareOptionsMenu(menu);
+		}
 	public class drawerOnItemClick implements ListView.OnItemClickListener {
 
 		@Override
