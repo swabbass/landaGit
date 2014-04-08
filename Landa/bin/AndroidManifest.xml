@@ -22,7 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       
+        <activity
+            android:name="ward.landa.CourseDetail"
+            android:label="hahahah" >
+        </activity>
     </application>
 
 </manifest>

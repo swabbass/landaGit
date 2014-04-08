@@ -3,6 +3,7 @@ package ward.landa;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.Choreographer.FrameCallback;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -46,7 +48,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		drawertitles = new String[] { "Updates", "Events", "Teachers",
 				"Courses", "Sign in" };
 
@@ -57,15 +59,18 @@ public class MainActivity extends FragmentActivity implements
 		draweList.setOnItemClickListener(new drawerOnItemClick());
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
-		drawertoggle=new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer,R.string.drawer_open , R.string.drawer_close){
-			
+		drawertoggle = new ActionBarDrawerToggle(this, drawerLayout,
+				R.drawable.ic_drawer, R.string.drawer_open,
+				R.string.drawer_close) {
+
 			@Override
 			public void onDrawerClosed(View drawerView) {
 				// TODO Auto-generated method stub
 				super.onDrawerClosed(drawerView);
-				 getActionBar().setTitle("Landa");
-				 invalidateOptionsMenu();
+				getActionBar().setTitle("Landa");
+				invalidateOptionsMenu();
 			}
+
 			@Override
 			public void onDrawerOpened(View drawerView) {
 				// TODO Auto-generated method stub
@@ -73,8 +78,11 @@ public class MainActivity extends FragmentActivity implements
 				getActionBar().setTitle("Navigate to ");
 				invalidateOptionsMenu();
 			}
+
 		};
-				
+
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
 
@@ -122,14 +130,30 @@ public class MainActivity extends FragmentActivity implements
 
 	}
 
-		@Override
-		public boolean onPrepareOptionsMenu(Menu menu) {
-			// TODO find the items and in menu and set it !drawerOpen
-			
-			boolean draweOpen=drawerLayout.isDrawerOpen(draweList);
-		
-			return super.onPrepareOptionsMenu(menu);
-		}
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+
+		super.onPostCreate(savedInstanceState);
+		drawertoggle.syncState();
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+		drawertoggle.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// TODO find the items and in menu and set it !drawerOpen
+
+		boolean draweOpen = drawerLayout.isDrawerOpen(draweList);
+
+		return super.onPrepareOptionsMenu(menu);
+	}
+
 	public class drawerOnItemClick implements ListView.OnItemClickListener {
 
 		@Override
@@ -146,9 +170,18 @@ public class MainActivity extends FragmentActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if (drawertoggle.onOptionsItemSelected(item)) {
+	          return true;
+	        }
+		return super.onOptionsItemSelected(item);
+	}
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
