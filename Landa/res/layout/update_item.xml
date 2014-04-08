@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/update_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="@drawable/shadow"
+    android:clickable="false"
+    android:gravity="center_vertical" >
+
+    <TextView
+        android:id="@+id/dateTimeUpdateTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#66ccff"
+        android:gravity="right"
+        android:text="dd/mm/yy HH:MM"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textDataUpdateTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/dateTimeUpdateTxtView"
+        android:layout_toRightOf="@+id/imgIcon"
+        android:maxLines="15"
+        android:minLines="4"
+        android:text="some text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textDataUpdateTxtView"
+        android:layout_below="@+id/dateTimeUpdateTxtView"
+        android:scaleType="fitCenter"
+        android:src="@drawable/news" />
+
+    <TextView
+        android:id="@+id/showallUpdateTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imgIcon"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textDataUpdateTxtView"
+        android:background="#e7eff6"
+        android:clickable="true"
+        android:gravity="right"
+        android:text="show all"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#5f6363" />
+
+</RelativeLayout>

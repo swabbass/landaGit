@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    android:weightSum="1"
+   
+    android:orientation="horizontal" >
+
+    <ward.landa.squareImage
+        android:layout_marginTop="6dp"
+        android:id="@+id/incourse_teacher_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shadow"
+        android:layout_weight="0.7"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/incourse_teacher_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        
+       
+        android:textColor="@android:color/black" />
+
+</LinearLayout>

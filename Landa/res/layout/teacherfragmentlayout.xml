@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dddddd"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:weightSum="1" >
+
+    <ward.landa.squareImage
+        android:id="@+id/teacherpicture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top"
+        android:background="@drawable/shadow"
+        android:layout_weight="0.5"
+        android:layout_marginTop="5dp"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:showDividers="beginning"
+       
+        android:weightSum="4" >
+
+        <TextView
+            android:id="@+id/nameteacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shadow_bg_red"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="NAme"
+            android:textColor="#ffffff"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/emailTeacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+                android:textSize="18sp"
+            android:textStyle="bold"
+             android:background="@drawable/shadow_bg_red"
+             android:textColor="#ffffff"
+            android:text="Email"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/facultyTeacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+                android:textSize="18sp"
+            android:textStyle="bold"
+             android:background="@drawable/shadow_bg_red"
+            android:text="Faculty"
+            android:textColor="#ffffff"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/positionteacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+                android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+             android:background="@drawable/shadow_bg_red"
+            android:text="position"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,32 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/courseLinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shadowcourse"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <ward.landa.squareImage
+        android:id="@+id/list_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:background="@drawable/shadow"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical|center"
+        android:text="course name"
+        android:textAlignment="center"
+        android:textColor="#040404"
+        android:textSize="15sp"
+        android:textStyle="bold|normal"
+        android:typeface="normal" />
+
+</LinearLayout>
