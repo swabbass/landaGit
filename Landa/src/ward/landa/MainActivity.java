@@ -1,7 +1,5 @@
 package ward.landa;
 
-import java.util.Locale;
-
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -62,6 +60,7 @@ public class MainActivity extends FragmentActivity implements
 			public void onDrawerClosed(View drawerView) {
 
 				super.onDrawerClosed(drawerView);
+			
 				getActionBar().setTitle("Landa");
 				invalidateOptionsMenu();
 			}
@@ -89,7 +88,7 @@ public class MainActivity extends FragmentActivity implements
 
 			@Override
 			public void onPageSelected(int pos) {
-				
+
 				switch (pos) {
 
 				case 0:
@@ -112,13 +111,11 @@ public class MainActivity extends FragmentActivity implements
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				
 
 			}
 
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				
 
 			}
 		});
@@ -127,7 +124,6 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
-		
 
 		super.onPostCreate(savedInstanceState);
 		drawertoggle.syncState();
@@ -135,7 +131,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-		
+
 		super.onConfigurationChanged(newConfig);
 		drawertoggle.onConfigurationChanged(newConfig);
 	}
@@ -162,15 +158,30 @@ public class MainActivity extends FragmentActivity implements
 
 			if ((c != null && c.isVisible()) || (t != null && t.isVisible())) {
 				Log.i("LANDA", "CourseFragment");
-				
-			getSupportFragmentManager().popBackStack();
+
+				getSupportFragmentManager().popBackStack();
 			}
 
 			if (arg2 < drawertitles.length)
-				mViewPager.setCurrentItem(arg2);
+				if (arg2 == drawertitles.length - 1) {
+					openLoginFragment();
+				} else {
+					mViewPager.setCurrentItem(arg2);
+				}
 			drawerLayout.closeDrawer(draweList);
 		}
 
+	}
+
+	public void openLoginFragment() {
+		LoginFragment login = new LoginFragment();
+		FragmentTransaction transaction = getSupportFragmentManager()
+				.beginTransaction();
+		transaction.replace(R.id.fragment_container, login, "LoginFragment");
+		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+		transaction.addToBackStack(null);
+		transaction.commit();
+		mSectionsPagerAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -183,7 +194,7 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+
 		if (drawertoggle.onOptionsItemSelected(item)) {
 			return true;
 		}
@@ -226,7 +237,7 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			//Locale l = Locale.getDefault();
+			// Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
 				return "Updates";
@@ -243,7 +254,7 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public int getItemPosition(Object object) {
-			
+
 			return POSITION_NONE;
 		}
 
@@ -304,19 +315,19 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		public int getCount() {
-			
+
 			return drawertitles.length;
 		}
 
 		@Override
 		public Object getItem(int arg0) {
-			
+
 			return drawertitles[arg0];
 		}
 
 		@Override
 		public long getItemId(int arg0) {
-			
+
 			return arg0;
 		}
 

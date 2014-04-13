@@ -14,7 +14,7 @@
         android:paddingRight="10dp"
         android:text="34min"
          android:textStyle="bold"
-        android:textColor="#ffffff" 
+        android:textColor="#BDBDBD" 
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/title_update"
-        android:padding="0dp"
+        android:padding="10dp"
         android:scaleType="fitStart"
-        android:src="@drawable/megaphone" />
+        android:src="@drawable/update_icon_new" />
 
     <TextView
         android:id="@+id/title_update"
@@ -37,7 +37,7 @@
         android:padding="3dp"
         android:text="Subject"
         android:textStyle="bold"
-        android:textColor="#ffffff" />
+        android:textColor="#666666" />
 
     <ward.landa.ExpandableTextView
         android:id="@+id/contentText"
@@ -52,7 +52,7 @@
         android:maxLines="2"
         android:text="news news news!!"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
+        android:textColor="#BDBDBD"
         android:textStyle="bold" />
 
 </RelativeLayout>
