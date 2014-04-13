@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent" >
+
+ <RelativeLayout
+    android:id="@+id/RelativeLayout01" android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+        <ImageButton android:id="@+id/search_text"
+            android:layout_alignParentRight="true"
+            android:text="Search"
+            android:layout_width="wrap_content"
+            android:src="@drawable/filter"
+            android:layout_height="wrap_content"/>
+        <EditText android:id="@+id/search_box" 
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/search_text"
+            android:layout_centerVertical="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search Teacher"
+            android:drawableLeft="@drawable/search_icon"
+            android:inputType="text"
+            android:maxLines="1" />
+</RelativeLayout>
+
 <GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
@@ -11,4 +34,5 @@
         android:horizontalSpacing="5dp"
         android:stretchMode="columnWidth"
         android:numColumns="4" />
-</FrameLayout>
+</LinearLayout>
+   
