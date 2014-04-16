@@ -3,11 +3,11 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-      android:background="#fff3d3"
-      
+    android:background="#fff3d3"
     android:clickable="true"
+    android:measureWithLargestChild="true"
     android:orientation="vertical"
-    android:weightSum="1"
+    android:weightSum="5"
     tools:context=".CourseFragment" >
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,12 +16,12 @@
         android:id="@+id/headerlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.80"
+        android:layout_weight="4"
         android:background="@drawable/shadowcourse" >
 
         <include
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_above="@+id/ratingBar1"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
@@ -50,8 +50,8 @@
     <ListView
         android:id="@+id/courseTeachers"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.20" >
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
     </ListView>
 
 </LinearLayout>

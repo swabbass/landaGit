@@ -47,9 +47,9 @@ public class MainActivity extends FragmentActivity implements
 
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		draweList = (ListView) findViewById(R.id.left_drawer);
-		draweAdapter dAdapter = new draweAdapter(getApplicationContext());
+		draweAdapter dAdapter = new draweAdapter(getApplicationContext(),drawertitles);
 		draweList.setAdapter(dAdapter);
-		draweList.setOnItemClickListener(new drawerOnItemClick());
+		draweList.setOnItemClickListener(new drawerOnItemClick(this));
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		drawertoggle = new ActionBarDrawerToggle(this, drawerLayout,
@@ -145,30 +145,35 @@ public class MainActivity extends FragmentActivity implements
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-	public class drawerOnItemClick implements ListView.OnItemClickListener {
+	static   class drawerOnItemClick implements ListView.OnItemClickListener {
 
+		MainActivity activityRef;
+		public drawerOnItemClick(MainActivity activity) {
+			// TODO Auto-generated constructor stub
+		activityRef=activity;
+		}
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 
-			CourseFragment c = (CourseFragment) getSupportFragmentManager()
+			CourseFragment c = (CourseFragment) activityRef.getSupportFragmentManager()
 					.findFragmentByTag("CourseFragment");
-			teacherFragment t = (teacherFragment) getSupportFragmentManager()
+			teacherFragment t = (teacherFragment) activityRef.getSupportFragmentManager()
 					.findFragmentByTag("TeacherFragment");
 
 			if ((c != null && c.isVisible()) || (t != null && t.isVisible())) {
 				Log.i("LANDA", "CourseFragment");
 
-				getSupportFragmentManager().popBackStack();
+				activityRef.getSupportFragmentManager().popBackStack();
 			}
 
-			if (arg2 < drawertitles.length)
-				if (arg2 == drawertitles.length - 1) {
-					openLoginFragment();
+			if (arg2 <activityRef. drawertitles.length)
+				if (arg2 == activityRef.drawertitles.length - 1) {
+					activityRef.openLoginFragment();
 				} else {
-					mViewPager.setCurrentItem(arg2);
+					activityRef.mViewPager.setCurrentItem(arg2);
 				}
-			drawerLayout.closeDrawer(draweList);
+			activityRef.drawerLayout.closeDrawer(activityRef.draweList);
 		}
 
 	}
@@ -201,7 +206,7 @@ public class MainActivity extends FragmentActivity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+	static class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -313,11 +318,12 @@ public class MainActivity extends FragmentActivity implements
 		
 	}
 
-	class draweAdapter extends BaseAdapter {
+	static class draweAdapter extends BaseAdapter {
 
 		LayoutInflater inflater = null;
-
-		public draweAdapter(Context cxt) {
+		String[] drawertitles;
+		public draweAdapter(Context cxt ,String[] drawertitles) {
+			this.drawertitles=drawertitles;
 			inflater = (LayoutInflater) cxt
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}

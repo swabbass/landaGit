@@ -10,8 +10,8 @@
     <ward.landa.squareImage
         android:layout_marginTop="6dp"
         android:id="@+id/incourse_teacher_pic"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:background="@drawable/shadow"
         android:layout_weight="0.7"
         android:scaleType="centerCrop" />

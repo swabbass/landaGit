@@ -75,7 +75,7 @@ public class FragmentUpdates extends Fragment {
 		return root;
 	}
 
-	class updatesAdapter extends BaseAdapter {
+	static class updatesAdapter extends BaseAdapter {
 
 		List<update> updates;
 		LayoutInflater inflater = null;

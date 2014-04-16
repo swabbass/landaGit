@@ -11,6 +11,7 @@ public class Course {
 	private int courseID;
 	private float rating;
 	private List<Teacher> teachers;
+	private int toShow;
 	public Course(int courseID,String name ,String dateString,String teacher,int imgId,float rate) {
 		setCourseID(courseID);
 		setName(name);
@@ -18,6 +19,7 @@ public class Course {
 		setTeacher(teacher);
 		setImgID(imgId);
 		setRating(rate);
+		setToShow(1);
 		teachers=new ArrayList<Teacher>();
 	
 	}
@@ -88,6 +90,12 @@ public class Course {
 	}
 	public void setRating(float rating) {
 		this.rating = rating;
+	}
+	public int getToShow() {
+		return toShow;
+	}
+	public void setToShow(int toShow) {
+		this.toShow = toShow;
 	}
 	
 	

@@ -5,19 +5,26 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class FragmentCourses extends Fragment {
 
@@ -33,7 +40,8 @@ public class FragmentCourses extends Fragment {
 	GridView g;
 	List<Course> courses;
 	View root;
-
+	EditText search;
+	List<Course> searced;
 	@Override
 	public void onAttach(Activity activity) {
 
@@ -58,10 +66,11 @@ public class FragmentCourses extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		 root= inflater.inflate(R.layout.courses_frag_grid, container,
-				false);
-		 g=(GridView)root.findViewById(R.id.gridviewcourses);
-		//l = (ListView) root.findViewById(R.id.courses_listView);
+		root = inflater.inflate(R.layout.courses_frag_grid, container, false);
+		g = (GridView) root.findViewById(R.id.gridviewcourses);
+		// l = (ListView) root.findViewById(R.id.courses_listView);
+		search = (EditText) root.findViewById(R.id.honechD);
+		searced=new ArrayList<Course>();
 		courses = new ArrayList<Course>();
 		Course c1 = new Course(100, "חדוא1", "Thursday 17:30", "Yoav",
 				R.drawable.calculas2, 0);
@@ -75,32 +84,87 @@ public class FragmentCourses extends Fragment {
 		courses.add(c2);
 		courses.add(c3);
 		courses.add(c4);
-		coursesAdapter uAdapter = new coursesAdapter(courses, getActivity());
+		final coursesAdapter uAdapter = new coursesAdapter(courses, getActivity(),
+				getResources(),0);
 		g.setAdapter(uAdapter);
 		g.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				callback.onCourseClick(courses.get(arg2));
+				callback.onCourseClick(uAdapter.searched==0 ? courses.get(arg2):searced.get(arg2));
 				g.setItemChecked(arg2, true);
 			}
 
 		});
+		search.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				Log.d("text", "text now changed");
+				if(s.length()!=0)
+				{
+					uAdapter.setCourses(search(s.toString()),1);
+					uAdapter.notifyDataSetChanged();
+					
+				}
+				else{
+					uAdapter.setCourses(courses,0);
+					uAdapter.notifyDataSetChanged();
+				}
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				Log.d("text", "before text now changed");
+				
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				Log.d("text", "after text now changed");
+				
+
+			}
+		});
 		return root;
 	}
 
-	class coursesAdapter extends BaseAdapter {
+	public List<Course> search(String st)
+	{
+		searced.clear();
+		for (Course c : courses)
+		{
+			if(c.getName().contains(st))
+			{
+				searced.add(c);
+			}
+		}
+		return  searced;
+	}
+	static class coursesAdapter extends BaseAdapter {
 
 		List<Course> courses;
 		LayoutInflater inflater = null;
 		Context cxt = null;
-
-		public coursesAdapter(List<Course> courses, Context cxt) {
+		Resources res;
+		int searched;
+		public void setCourses(List<Course> courses,int search) {
+			this.courses = courses;
+			this.searched=search;
+		}
+		public coursesAdapter(List<Course> courses, Context cxt, Resources res,int search) {
 			this.courses = courses;
 			this.cxt = cxt;
 			this.inflater = (LayoutInflater) cxt
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			this.res = res;
+			this.searched=search;
 		}
 
 		@Override
@@ -128,7 +192,7 @@ public class FragmentCourses extends Fragment {
 			ImageView picture;
 			TextView name;
 			RatingBar rb;
-
+			Course c = (Course) getItem(position);
 			if (v == null) {
 				v = inflater.inflate(R.layout.course_item_grid, parent, false);
 				v.setTag(R.id.list_image, v.findViewById(R.id.list_image));
@@ -136,9 +200,11 @@ public class FragmentCourses extends Fragment {
 			}
 			picture = (ImageView) v.getTag(R.id.list_image);
 			name = (TextView) v.getTag(R.id.title);
-			Course c = (Course) getItem(position);
+			
 
-			picture.setImageResource(c.getImgID());
+			// picture.setImageResource(c.getImgID());
+			picture.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
+					res, c.getImgID(), 100, 100));
 			name.setText(c.getName());
 			return v;
 		}

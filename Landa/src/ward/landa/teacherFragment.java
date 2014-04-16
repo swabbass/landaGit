@@ -24,7 +24,9 @@ public class teacherFragment extends Fragment {
 			Bundle ext =getArguments();
 			if(ext!=null)
 			{
-				img.setImageResource(ext.getInt("imgid"));
+				int imgid=ext.getInt("imgid");
+				img.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
+						getResources(), imgid, 100, 100));
 				name.setText(ext.getString("name"));
 				email.setText(ext.getString("email"));
 				faculty.setText(ext.getString("faculty"));

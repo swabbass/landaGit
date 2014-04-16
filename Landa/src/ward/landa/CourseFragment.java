@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -52,20 +53,23 @@ public class CourseFragment extends Fragment {
 		nameView=(TextView)root.findViewById(R.id.title);
 		courseImg=(ImageView)root.findViewById(R.id.list_image);
 		nameView.setText(courseID+" "+courseName+"");
-		courseImg.setImageResource(imgId);
+		courseImg.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
+					getResources(), this.imgId, 100, 100));
 		l=(ListView)root.findViewById(R.id.courseTeachers);
-		adapter ad=new adapter(getActivity());
+		adapter ad=new adapter(getActivity(),teachers,getResources());
 		l.setAdapter(ad);
 		return root;
 	}
 
-	class adapter extends BaseAdapter {
+	static class adapter extends BaseAdapter {
 		public LayoutInflater inflater;
-
-		public adapter(Context cxt) {
-
+		List<Teacher> teachers;
+		Resources res;
+		public adapter(Context cxt,List<Teacher> teachers,Resources res) {
+			this.teachers=teachers;
 			this.inflater=(LayoutInflater) cxt
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			this.res=res;
 		}
 
 		@Override
@@ -101,6 +105,8 @@ public class CourseFragment extends Fragment {
 			name = (TextView) v.getTag(R.id.incourse_teacher_text);
 			Teacher t=(Teacher)getItem(pos);
 			picture.setImageResource(t.getImgId());
+			picture.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
+					res, t.getImgId(), 100, 100));
 			name.setText(t.toString());
 			return v;
 		}

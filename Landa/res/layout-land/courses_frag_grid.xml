@@ -7,12 +7,12 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/studID"
+        android:id="@+id/honechD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/search_icon"
         android:ems="10"
-        android:hint="Search Course Here"
-        android:drawableLeft="@drawable/search_icon" >
+        android:hint="Search Course Here" >
 
     </EditText>
 
