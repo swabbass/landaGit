@@ -60,7 +60,7 @@ public class MainActivity extends FragmentActivity implements
 			public void onDrawerClosed(View drawerView) {
 
 				super.onDrawerClosed(drawerView);
-			
+
 				getActionBar().setTitle("Landa");
 				invalidateOptionsMenu();
 			}
@@ -181,7 +181,7 @@ public class MainActivity extends FragmentActivity implements
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		transaction.addToBackStack(null);
 		transaction.commit();
-		mSectionsPagerAdapter.notifyDataSetChanged();
+		
 	}
 
 	@Override
@@ -267,7 +267,11 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	public void onCourseClick(Course c) {
-		CourseFragment cf = new CourseFragment();
+		CourseFragment cf;
+		FragmentManager fm = getSupportFragmentManager();
+		cf=(CourseFragment)fm.findFragmentByTag("CourseFragment");
+		if(cf==null){
+			cf= new CourseFragment();
 		Bundle extras = new Bundle();
 		extras.putString("name", c.getName());
 		extras.putInt("ImageID", c.getImgID());
@@ -281,7 +285,12 @@ public class MainActivity extends FragmentActivity implements
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		transaction.addToBackStack(null);
 		transaction.commit();
-		mSectionsPagerAdapter.notifyDataSetChanged();
+		}
+		else
+		{
+			Log.d("hehe","null");
+		}
+		
 
 	}
 
@@ -301,7 +310,7 @@ public class MainActivity extends FragmentActivity implements
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		transaction.addToBackStack(null);
 		transaction.commit();
-		mSectionsPagerAdapter.notifyDataSetChanged();
+		
 	}
 
 	class draweAdapter extends BaseAdapter {
