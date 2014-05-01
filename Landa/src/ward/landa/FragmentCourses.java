@@ -14,6 +14,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -43,65 +45,15 @@ public class FragmentCourses extends Fragment {
 	GridView g;
 	List<Course> courses;
 	View root;
-	EditText search;
+	coursesAdapter uAdapter;
 	List<Course> searced;
 	@Override
-	public void onAttach(Activity activity) {
-
-		try {
-			callback = (OnCourseSelected) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement OnCourseSelected");
-		}
-		super.onAttach(activity);
-	}
-
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		root = inflater.inflate(R.layout.courses_frag_grid, container, false);
-		g = (GridView) root.findViewById(R.id.gridviewcourses);
-		// l = (ListView) root.findViewById(R.id.courses_listView);
-		search = (EditText) root.findViewById(R.id.honechD);
-		search.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				InputMethodManager imm=Utilities.getInputMethodManager(getActivity());
-				
-			}
-		});
-		searced=new ArrayList<Course>();
-		courses = new ArrayList<Course>();
-		Course c1 = new Course(100, "חדוא1", "Thursday 17:30", "Yoav",
-				R.drawable.calculas2, 0);
-		Course c2 = new Course(1110, "אלגברה", "Wednesday 14:30", "Yoav",
-				R.drawable.akgebramatrix, 0);
-		Course c3 = new Course(110, "מבוא למדעי מחשב", "Monday 19:30", "Yoav",
-				R.drawable.c, 0);
-		Course c4 = new Course(102, "כימיה כללית", "Sunday 13:00", "Yoav",
-				R.drawable.chemestry, 0);
-		courses.add(c1);
-		courses.add(c2);
-		courses.add(c3);
-		courses.add(c4);
-		final coursesAdapter uAdapter = new coursesAdapter(courses, getActivity(),
-				getResources(),0);
-		g.setAdapter(uAdapter);
-		g.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				callback.onCourseClick(uAdapter.searched==0 ? courses.get(arg2):searced.get(arg2));
-				g.setItemChecked(arg2, true);
-			}
-
-		});
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		getActivity().getMenuInflater().inflate(R.menu.course_menu, menu);
+		View v=(View)menu.findItem(R.id.course_menu_search).getActionView();
+		
+		EditText search=(EditText)v.findViewById(R.id.course_txt_search);
 		search.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -137,6 +89,57 @@ public class FragmentCourses extends Fragment {
 
 			}
 		});
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+	@Override
+	public void onAttach(Activity activity) {
+
+		try {
+			callback = (OnCourseSelected) activity;
+			setHasOptionsMenu(true);
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString()
+					+ " must implement OnCourseSelected");
+		}
+		super.onAttach(activity);
+	}
+
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		root = inflater.inflate(R.layout.courses_frag_grid, container, false);
+		g = (GridView) root.findViewById(R.id.gridviewcourses);
+		// l = (ListView) root.findViewById(R.id.courses_listView);
+		searced=new ArrayList<Course>();
+		courses = new ArrayList<Course>();
+		Course c1 = new Course(100, "חדוא1", "Thursday 17:30", "Yoav",
+				R.drawable.calculas2, 0);
+		Course c2 = new Course(1110, "אלגברה", "Wednesday 14:30", "Yoav",
+				R.drawable.akgebramatrix, 0);
+		Course c3 = new Course(110, "מבוא למדעי מחשב", "Monday 19:30", "Yoav",
+				R.drawable.c, 0);
+		Course c4 = new Course(102, "כימיה כללית", "Sunday 13:00", "Yoav",
+				R.drawable.chemestry, 0);
+		courses.add(c1);
+		courses.add(c2);
+		courses.add(c3);
+		courses.add(c4);
+		 uAdapter = new coursesAdapter(courses, getActivity(),
+				getResources(),0);
+		g.setAdapter(uAdapter);
+		g.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				callback.onCourseClick(uAdapter.searched==0 ? courses.get(arg2):searced.get(arg2));
+				g.setItemChecked(arg2, true);
+			}
+
+		});
+		
 		return root;
 	}
 

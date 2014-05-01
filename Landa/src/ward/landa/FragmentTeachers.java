@@ -13,6 +13,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,77 +30,16 @@ public class FragmentTeachers extends Fragment {
 	List<Teacher> teachers;
 	List<Teacher> searched;
 	callbackTeacher tCallback;
-
-	public interface callbackTeacher {
-		public void OnTeacherItemClick(Teacher t);
-	}
 	
-	EditText search;
+	gridAdabter gAdapter;
 	@Override
-	public void onAttach(Activity activity) {
-		try {
-			tCallback = (callbackTeacher) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement callbackTeacher");
-		}
-		super.onAttach(activity);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
-		View root = inflater.inflate(R.layout.teacher_custom_grid, container,
-				false);
-		teachers = new ArrayList<Teacher>();
-		searched=new ArrayList<Teacher>();
-		search = (EditText) root.findViewById(R.id.search_box);
-		// ////////////////////Testing//////////////////////////
-		Teacher t1 = new Teacher(0000, R.drawable.ward, "ward",
-				"mail@ward.com", "0555", "חברתי", "CS");
-		Teacher t2 = new Teacher(111, R.drawable.mohammed, "Mohammed",
-				"mail@mohammed.com", "015", "אקדמי", "CS");
-		Teacher t3 = new Teacher(121, R.drawable.hamed, "Hammed",
-				"mail@hamed.com", "0555", "רכז אקדמי", "מתמטיקה");
-		Teacher t4 = new Teacher(333, R.drawable.stlzbale, "حسن",
-				"mail@stlzbale.com", "0555", "רכז חברתי", "CS");
-		Teacher t5 = new Teacher(888, R.drawable.aiman, "ايمن",
-				"mail@aiman.com", "0555", "אקדמי", "כימיה");
-		Teacher t6 = new Teacher(444, R.drawable.almotna, "Almothana",
-				"mail@almotna.com", "0555", "אקדמי", "CS");
-		Teacher t7 = new Teacher(555, R.drawable.mhde, "Mahade",
-				"mail@mhde.com", "0555", "חברתי", "אזרחית");
-		Teacher t8 = new Teacher(666, R.drawable.gasan, "Ghasan",
-				"mail@gasan.com", "0555", "אקדמי", "CS");
-		Teacher t9 = new Teacher(777, R.drawable.rami, "الله لا يكبرو",
-				"mail@rami.com", "0555", "חברתי", "תעשיה ניהוך");
-		teachers.add(t1);
-		teachers.add(t2);
-		teachers.add(t3);
-		teachers.add(t4);
-		teachers.add(t5);
-		teachers.add(t6);
-		teachers.add(t7);
-		teachers.add(t8);
-		teachers.add(t9);
-		final gridAdabter gAdapter=new gridAdabter(root.getContext(), teachers,
-				getResources(),0);
-		GridView gridView = (GridView) root.findViewById(R.id.gridview);
-		gridView.setAdapter(gAdapter);
-
-		gridView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				tCallback.OnTeacherItemClick(gAdapter.searched == 0 ? teachers.get(arg2) : searched.get(arg2));
-
-			}
-		});
+		super.onCreateOptionsMenu(menu, inflater);
+		getActivity().getMenuInflater().inflate(R.menu.teacher_menu, menu);
+		View v=(View)menu.findItem(R.id.teacher_menu_search).getActionView();
 		
-		
-		// ////////////////////Testing//////////////////////////
+		EditText search=(EditText)v.findViewById(R.id.teacher_txt_search);
 		search.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -147,6 +88,80 @@ public class FragmentTeachers extends Fragment {
 
 			}
 		});
+		
+		
+	}
+	public interface callbackTeacher {
+		public void OnTeacherItemClick(Teacher t);
+	}
+	
+	
+	
+	@Override
+	public void onAttach(Activity activity) {
+		try {
+			tCallback = (callbackTeacher) activity;
+			setHasOptionsMenu(true);
+		} catch (ClassCastException e) {
+			throw new ClassCastException(activity.toString()
+					+ " must implement callbackTeacher");
+		}
+		super.onAttach(activity);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		View root = inflater.inflate(R.layout.teacher_custom_grid, container,
+				false);
+		teachers = new ArrayList<Teacher>();
+		searched=new ArrayList<Teacher>();
+		
+		// ////////////////////Testing//////////////////////////
+		Teacher t1 = new Teacher(0000, R.drawable.ward, "ward",
+				"mail@ward.com", "0555", "חברתי", "CS");
+		Teacher t2 = new Teacher(111, R.drawable.mohammed, "Mohammed",
+				"mail@mohammed.com", "015", "אקדמי", "CS");
+		Teacher t3 = new Teacher(121, R.drawable.hamed, "Hammed",
+				"mail@hamed.com", "0555", "רכז אקדמי", "מתמטיקה");
+		Teacher t4 = new Teacher(333, R.drawable.stlzbale, "حسن",
+				"mail@stlzbale.com", "0555", "רכז חברתי", "CS");
+		Teacher t5 = new Teacher(888, R.drawable.aiman, "ايمن",
+				"mail@aiman.com", "0555", "אקדמי", "כימיה");
+		Teacher t6 = new Teacher(444, R.drawable.almotna, "Almothana",
+				"mail@almotna.com", "0555", "אקדמי", "CS");
+		Teacher t7 = new Teacher(555, R.drawable.mhde, "Mahade",
+				"mail@mhde.com", "0555", "חברתי", "אזרחית");
+		Teacher t8 = new Teacher(666, R.drawable.gasan, "Ghasan",
+				"mail@gasan.com", "0555", "אקדמי", "CS");
+		Teacher t9 = new Teacher(777, R.drawable.rami, "الله لا يكبرو",
+				"mail@rami.com", "0555", "חברתי", "תעשיה ניהוך");
+		teachers.add(t1);
+		teachers.add(t2);
+		teachers.add(t3);
+		teachers.add(t4);
+		teachers.add(t5);
+		teachers.add(t6);
+		teachers.add(t7);
+		teachers.add(t8);
+		teachers.add(t9);
+		gAdapter=new gridAdabter(root.getContext(), teachers,
+				getResources(),0);
+		GridView gridView = (GridView) root.findViewById(R.id.gridview);
+		gridView.setAdapter(gAdapter);
+
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				tCallback.OnTeacherItemClick(gAdapter.searched == 0 ? teachers.get(arg2) : searched.get(arg2));
+
+			}
+		});
+		
+		
 		return root;
 	}
 

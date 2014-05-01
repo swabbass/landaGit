@@ -32,7 +32,6 @@ public class MainActivity extends FragmentActivity implements
 		FragmentCourses.OnCourseSelected, FragmentTeachers.callbackTeacher {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
-
 	ViewPager mViewPager;
 	PagerTitleStrip strip;
 	DrawerLayout drawerLayout;

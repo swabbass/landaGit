@@ -3,18 +3,8 @@
     android:id="@+id/replace_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff3d3"
+    android:background="#eeeeee"
     android:orientation="vertical" >
-
-    <EditText
-        android:id="@+id/honechD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/search_icon"
-        android:ems="10"
-        android:hint="Search Course Here" >
-
-    </EditText>
 
    <GridView
         android:id="@+id/gridviewcourses"
