@@ -3,7 +3,6 @@ package ward.landa;
 import java.util.ArrayList;
 import java.util.List;
 
-import ward.landa.CourseFragment.adapter;
 import ward.landa.ImageUtilities.BitmapUtils;
 import android.app.Activity;
 import android.content.Context;
