@@ -12,40 +12,27 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/headerlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="4"
-        android:background="@drawable/shadowcourse" >
-
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/ratingBar1"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/attendtocourse"
-            layout="@layout/course_fragment_header" />
-
-        <Button
-            android:id="@+id/attendtocourse"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/custombutton" />
+        android:background="@drawable/shadowcourse"
+        android:orientation="vertical"
+        android:weightSum="10" >
 
         <RatingBar
             android:id="@+id/ratingBar1"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="8"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="2" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/courseTeachers"

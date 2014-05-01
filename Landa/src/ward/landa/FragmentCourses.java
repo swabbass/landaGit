@@ -3,6 +3,7 @@ package ward.landa;
 import java.util.ArrayList;
 import java.util.List;
 
+import ward.landa.ImageUtilities.BitmapUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,7 +15,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -54,13 +57,6 @@ public class FragmentCourses extends Fragment {
 		super.onAttach(activity);
 	}
 
-	@Override
-	public void onStart() {
-
-		// list already viewed
-
-		super.onStart();
-	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +66,15 @@ public class FragmentCourses extends Fragment {
 		g = (GridView) root.findViewById(R.id.gridviewcourses);
 		// l = (ListView) root.findViewById(R.id.courses_listView);
 		search = (EditText) root.findViewById(R.id.honechD);
+		search.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				InputMethodManager imm=Utilities.getInputMethodManager(getActivity());
+				
+			}
+		});
 		searced=new ArrayList<Course>();
 		courses = new ArrayList<Course>();
 		Course c1 = new Course(100, "חדוא1", "Thursday 17:30", "Yoav",
@@ -153,6 +158,7 @@ public class FragmentCourses extends Fragment {
 		LayoutInflater inflater = null;
 		Context cxt = null;
 		Resources res;
+		BitmapUtils bmpUtils;
 		int searched;
 		public void setCourses(List<Course> courses,int search) {
 			this.courses = courses;
@@ -165,6 +171,8 @@ public class FragmentCourses extends Fragment {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			this.res = res;
 			this.searched=search;
+			this.bmpUtils=new BitmapUtils(cxt);
+
 		}
 
 		@Override
@@ -203,8 +211,9 @@ public class FragmentCourses extends Fragment {
 			
 
 			// picture.setImageResource(c.getImgID());
-			picture.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
-					res, c.getImgID(), 100, 100));
+			bmpUtils.loadBitmap(c.getImgID(), picture);
+		/*	picture.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
+					res, c.getImgID(), 100, 100));*/
 			name.setText(c.getName());
 			return v;
 		}

@@ -1,32 +1,33 @@
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/courseLinearLayout1"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shadowcourse"
-    android:orientation="vertical"
-    android:weightSum="1" >
+    android:layout_height="250dp"
+    android:background="@drawable/shadow" >
 
     <ward.landa.squareImage
         android:id="@+id/list_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:background="@drawable/shadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.6"
-        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="#ffc425"
         android:gravity="center_vertical|center"
         android:text="course name"
         android:textAlignment="center"
-        android:textColor="#040404"
+        android:textColor="#ffffff"
         android:textSize="15sp"
         android:textStyle="bold|normal"
         android:typeface="normal" />
 
-</LinearLayout>
+</RelativeLayout>

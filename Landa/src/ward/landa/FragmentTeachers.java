@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ward.landa.CourseFragment.adapter;
+import ward.landa.ImageUtilities.BitmapUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -155,6 +156,7 @@ public class FragmentTeachers extends Fragment {
 		LayoutInflater inflater;
 		List<Teacher> l;
 		Resources res;
+		BitmapUtils bmpUtils;
 		int searched=0;
 		public void setL(List<Teacher> l,int search) {
 			this.l = l;
@@ -165,6 +167,7 @@ public class FragmentTeachers extends Fragment {
 			this.l = l;
 			this.res = res;
 			this.searched=search;
+			this.bmpUtils=new BitmapUtils(context);
 			// TODO Auto-generated constructor stub
 		}
 
@@ -203,9 +206,9 @@ public class FragmentTeachers extends Fragment {
 			name = (TextView) v.getTag(R.id.text);
 
 			Teacher teacher = (Teacher) getItem(pos);
-
-			picture.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
-					res, teacher.getImgId(), 150, 150));
+			bmpUtils.loadBitmap(teacher.getImgId(), picture);
+			/*picture.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
+					res, teacher.getImgId(), 150, 150));*/
 			name.setText(teacher.toString());
 
 			return v;

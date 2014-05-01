@@ -3,6 +3,7 @@ package ward.landa;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -41,13 +44,16 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		this.getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		drawertitles = new String[] { "Updates", "Events", "Teachers",
 				"Courses", "Sign in" };
 
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		draweList = (ListView) findViewById(R.id.left_drawer);
-		draweAdapter dAdapter = new draweAdapter(getApplicationContext(),drawertitles);
+		draweAdapter dAdapter = new draweAdapter(getApplicationContext(),
+				drawertitles);
 		draweList.setAdapter(dAdapter);
 		draweList.setOnItemClickListener(new drawerOnItemClick(this));
 		// Create the adapter that will return a fragment for each of the three
@@ -74,7 +80,7 @@ public class MainActivity extends FragmentActivity implements
 			}
 
 		};
-
+		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -145,21 +151,25 @@ public class MainActivity extends FragmentActivity implements
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-	static   class drawerOnItemClick implements ListView.OnItemClickListener {
+	static class drawerOnItemClick implements ListView.OnItemClickListener {
 
 		MainActivity activityRef;
+
 		public drawerOnItemClick(MainActivity activity) {
 			// TODO Auto-generated constructor stub
-		activityRef=activity;
+			activityRef = activity;
 		}
+
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 
-			CourseFragment c = (CourseFragment) activityRef.getSupportFragmentManager()
-					.findFragmentByTag("CourseFragment");
-			teacherFragment t = (teacherFragment) activityRef.getSupportFragmentManager()
-					.findFragmentByTag("TeacherFragment");
+			CourseFragment c = (CourseFragment) activityRef
+					.getSupportFragmentManager().findFragmentByTag(
+							"CourseFragment");
+			teacherFragment t = (teacherFragment) activityRef
+					.getSupportFragmentManager().findFragmentByTag(
+							"TeacherFragment");
 
 			if ((c != null && c.isVisible()) || (t != null && t.isVisible())) {
 				Log.i("LANDA", "CourseFragment");
@@ -167,7 +177,7 @@ public class MainActivity extends FragmentActivity implements
 				activityRef.getSupportFragmentManager().popBackStack();
 			}
 
-			if (arg2 <activityRef. drawertitles.length)
+			if (arg2 < activityRef.drawertitles.length)
 				if (arg2 == activityRef.drawertitles.length - 1) {
 					activityRef.openLoginFragment();
 				} else {
@@ -186,7 +196,7 @@ public class MainActivity extends FragmentActivity implements
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		transaction.addToBackStack(null);
 		transaction.commit();
-		
+
 	}
 
 	@Override
@@ -274,28 +284,28 @@ public class MainActivity extends FragmentActivity implements
 	public void onCourseClick(Course c) {
 		CourseFragment cf;
 		FragmentManager fm = getSupportFragmentManager();
-		cf=(CourseFragment)fm.findFragmentByTag("CourseFragment");
-		if(cf==null){
-			cf= new CourseFragment();
-		Bundle extras = new Bundle();
-		extras.putString("name", c.getName());
-		extras.putInt("ImageID", c.getImgID());
-		extras.putInt("courseID", c.getCourseID());
-		cf.setArguments(extras);
-		FragmentTransaction transaction = getSupportFragmentManager()
-				.beginTransaction();
-		transaction
-				.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-		transaction.replace(R.id.fragment_container, cf, "CourseFragment");
-		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		transaction.addToBackStack(null);
-		transaction.commit();
+		cf = (CourseFragment) fm.findFragmentByTag("CourseFragment");
+		if (cf == null) {
+
+			cf = new CourseFragment();
+			
+						Bundle extras = new Bundle();
+			extras.putString("name", c.getName());
+			extras.putInt("ImageID", c.getImgID());
+			extras.putInt("courseID", c.getCourseID());
+			cf.setArguments(extras);
+			FragmentTransaction transaction = getSupportFragmentManager()
+					.beginTransaction();
+			transaction
+					.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+			transaction.replace(R.id.fragment_container, cf, "CourseFragment");
+			transaction
+					.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+			transaction.addToBackStack(null);
+			transaction.commit();
+		} else {
+			Log.d("hehe", "null");
 		}
-		else
-		{
-			Log.d("hehe","null");
-		}
-		
 
 	}
 
@@ -315,15 +325,16 @@ public class MainActivity extends FragmentActivity implements
 		transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 		transaction.addToBackStack(null);
 		transaction.commit();
-		
+
 	}
 
 	static class draweAdapter extends BaseAdapter {
 
 		LayoutInflater inflater = null;
 		String[] drawertitles;
-		public draweAdapter(Context cxt ,String[] drawertitles) {
-			this.drawertitles=drawertitles;
+
+		public draweAdapter(Context cxt, String[] drawertitles) {
+			this.drawertitles = drawertitles;
 			inflater = (LayoutInflater) cxt
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}

@@ -3,7 +3,7 @@
     android:id="@+id/replace_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff3d3"
+    android:background="#eeeeee"
     android:orientation="vertical" >
 
     <EditText
@@ -13,16 +13,15 @@
         android:drawableLeft="@drawable/search_icon"
         android:ems="10"
         android:hint="Search Course Here" >
-
     </EditText>
 
-   <GridView
+    <GridView
         android:id="@+id/gridviewcourses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
+        android:numColumns="2"
         android:stretchMode="columnWidth"
-        android:numColumns="2" />
+        android:verticalSpacing="5dp" />
 
 </LinearLayout>

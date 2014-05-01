@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,10 +26,37 @@ public class CourseFragment extends Fragment {
 	String courseName;
 	TextView nameView;
 	ImageView courseImg;
+	
 	@Override
 	public void onStart() {
 
+		// list already viewed
+		Log.e("Fragment", "fragment course is started");
 		super.onStart();
+	}
+	@Override
+	public void onPause() {
+		Log.e("Fragment", "fragment course is paused");
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
+	@Override
+	public void onStop() {
+		Log.e("Fragment", "fragment course is stopped");
+		// TODO Auto-generated method stub
+		super.onStop();
+	}
+	@Override
+	public void onDestroy() {
+		Log.e("Fragment", "fragment course is destroyed");
+		super.onDestroy();
+	}
+	@Override
+	public void onDetach() {
+			
+		// TODO Auto-generated method stub
+		Log.e("Fragment", "fragment course is deattached");
+		super.onDetach();
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,11 +79,11 @@ public class CourseFragment extends Fragment {
 			this.imgId=ex.getInt("ImageID");
 			this.courseID=ex.getInt("courseID");
 		}
-		nameView=(TextView)root.findViewById(R.id.title);
-		courseImg=(ImageView)root.findViewById(R.id.list_image);
-		nameView.setText(courseID+" "+courseName+"");
-		courseImg.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
-					getResources(), this.imgId, 100, 100));
+//		nameView=(TextView)root.findViewById(R.id.title);
+//		courseImg=(ImageView)root.findViewById(R.id.list_image);
+//		nameView.setText(courseID+" "+courseName+"");
+//		courseImg.setImageBitmap(Utilities.decodeSampledBitmapFromResource(
+//					getResources(), this.imgId, 100, 100));
 		l=(ListView)root.findViewById(R.id.courseTeachers);
 		adapter ad=new adapter(getActivity(),teachers,getResources());
 		l.setAdapter(ad);
@@ -62,7 +91,7 @@ public class CourseFragment extends Fragment {
 	}
 
 	static class adapter extends BaseAdapter {
-		public LayoutInflater inflater;
+		 LayoutInflater inflater;
 		List<Teacher> teachers;
 		Resources res;
 		public adapter(Context cxt,List<Teacher> teachers,Resources res) {

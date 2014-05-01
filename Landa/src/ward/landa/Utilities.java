@@ -1,10 +1,19 @@
 package ward.landa;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.inputmethod.InputMethodManager;
 
 public class Utilities {
+	
+	public static InputMethodManager  getInputMethodManager (Activity activity)
+	{
+		return (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+	}
+
 	public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
     // Raw height and width of image
