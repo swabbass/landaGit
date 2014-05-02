@@ -16,7 +16,7 @@ public class teacherFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 			View root=inflater.inflate(R.layout.teacherfragmentlayout, container,false);
-			ImageView img=(ImageView) root.findViewById(R.id.teacherpicture);
+			ImageView img=(ImageView) root.findViewById(R.id.teacher_picture);
 			TextView name=(TextView) root.findViewById(R.id.nameteacher);
 			TextView email=(TextView) root.findViewById(R.id.emailTeacher);
 			TextView faculty=(TextView) root.findViewById(R.id.facultyTeacher);

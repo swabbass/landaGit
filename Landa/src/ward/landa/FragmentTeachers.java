@@ -34,7 +34,6 @@ public class FragmentTeachers extends Fragment {
 	gridAdabter gAdapter;
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu, inflater);
 		getActivity().getMenuInflater().inflate(R.menu.teacher_menu, menu);
 		View v=(View)menu.findItem(R.id.teacher_menu_search).getActionView();
@@ -45,7 +44,6 @@ public class FragmentTeachers extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// TODO Auto-generated method stub
 				Log.d("text", "text now changed");
 				if(s.length()!=0)
 				{

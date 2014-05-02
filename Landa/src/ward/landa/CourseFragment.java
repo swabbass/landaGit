@@ -58,6 +58,9 @@ public class CourseFragment extends Fragment {
 		Log.e("Fragment", "fragment course is deattached");
 		super.onDetach();
 	}
+	
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

@@ -23,7 +23,7 @@ class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
 	@Override
 	protected Bitmap doInBackground(Integer... params) {
 		setData(params[0]);
-		return bmpUtils.decodeBitmapNoAllocation(getData(), 100, 100);
+		return bmpUtils.decodeBitmapNoAllocation(getData(), 250, 250);
 	}
 
 	// Once complete, see if ImageView is still around and set bitmap.

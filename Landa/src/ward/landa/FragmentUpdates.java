@@ -48,10 +48,31 @@ public class FragmentUpdates extends Fragment {
 		public void onUpdateButtonClick(ImageButton btn, int pos,
 				List<Update> updates, boolean show);
 	}
-
+	
+	
+	@Override
+	public void onResume() {
+		Log.d("Fragment","on resume updates");
+		super.onResume();
+	}
+	@Override
+	public void onStop() {
+		Log.d("Fragment","on stop updates");
+		super.onStop();
+	}
+	@Override
+	public void onStart() {
+		Log.d("Fragment","on start updates");
+		super.onStart();
+	}
+	@Override
+	public void onPause() {
+		Log.d("Fragment","on pause updates");
+		super.onPause();
+	}
 	@Override
 	public void onAttach(Activity activity) {
-		// TODO Auto-generated method stub
+		Log.d("Fragment","on attach updates");
 		try {
 			callBack = (updateCallback) activity;
 			setHasOptionsMenu(true);
@@ -65,7 +86,7 @@ public class FragmentUpdates extends Fragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
+
 		switch (item.getItemId()) {
 		case R.id.showall:
 			if (!showAll) {
@@ -104,7 +125,7 @@ public class FragmentUpdates extends Fragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
+
 		getActivity().getMenuInflater().inflate(R.menu.listmenu, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
@@ -112,7 +133,7 @@ public class FragmentUpdates extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		Log.d("Fragment","on create updates");
 		View root = inflater.inflate(R.layout.updates_frag_list, container,
 				false);
 		l = (ListView) root.findViewById(R.id.updates_listView);
@@ -199,26 +220,26 @@ public class FragmentUpdates extends Fragment {
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
+	
 			return updates.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
+	
 			return updates.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
+	
 			return position;
 		}
 
 		@Override
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
-			// TODO Auto-generated method stub
+	
 			View v = convertView;
 			TextView title;
 			TextView time;
@@ -250,11 +271,6 @@ public class FragmentUpdates extends Fragment {
 							showall);
 					if (!showall) {
 						updateSource(updates);
-					} else {
-						
-						//after activating update switch 
-						//setUpdates(filterActive(source));
-						//notifyDataSetChanged();
 					}
 
 				}
