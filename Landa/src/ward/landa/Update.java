@@ -3,15 +3,16 @@ package ward.landa;
 
 
 
-public class update {
+public class Update {
 	private String text;
-
-	 public update(String str) {
+	private boolean active;
+	 public Update(String str) {
 		// TODO Auto-generated constructor stub
 		 if(str!=null)
 		 this.text=str;
 		 else 
 			 this.text="I have empty text hello world hey !";
+		 setActive(true);
 	}
 	 
 	public String getText() {
@@ -36,6 +37,14 @@ public class update {
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 

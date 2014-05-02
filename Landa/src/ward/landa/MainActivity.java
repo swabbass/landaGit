@@ -1,5 +1,7 @@
 package ward.landa;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -22,14 +24,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.Choreographer.FrameCallback;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements
-		FragmentCourses.OnCourseSelected, FragmentTeachers.callbackTeacher {
+		FragmentCourses.OnCourseSelected, FragmentTeachers.callbackTeacher,
+		FragmentUpdates.updateCallback {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
@@ -79,7 +84,7 @@ public class MainActivity extends FragmentActivity implements
 			}
 
 		};
-		
+
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
@@ -287,8 +292,8 @@ public class MainActivity extends FragmentActivity implements
 		if (cf == null) {
 
 			cf = new CourseFragment();
-			
-						Bundle extras = new Bundle();
+
+			Bundle extras = new Bundle();
 			extras.putString("name", c.getName());
 			extras.putInt("ImageID", c.getImgID());
 			extras.putInt("courseID", c.getCourseID());
@@ -369,6 +374,31 @@ public class MainActivity extends FragmentActivity implements
 			return v;
 
 		}
+
+	}
+
+	@Override
+	public void onUpdateClick(int pos) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onUpdateButtonClick(ImageButton btn, int pos,
+			List<Update> updates, boolean show) {
+		// TODO Auto-generated method stub
+	
+			if (updates.get(pos).isActive()) {
+				updates.get(pos).setActive(false);
+				btn.setImageResource(R.drawable.megaphone_after);
+				Fx.slideDown(getApplicationContext(), btn);
+			} else {
+				updates.get(pos).setActive(true);
+				btn.setImageResource(R.drawable.update_icon_new);
+				Fx.slideUp(getApplicationContext(), btn);
+			}
+
+		
 
 	}
 

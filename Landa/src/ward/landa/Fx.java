@@ -21,6 +21,34 @@ public class Fx {
 			v.startAnimation(a);
 		}
 	}
+	public static void slideDown(Context cxt,View v,int anim)
+	{
+	
+		Animation a=AnimationUtils.loadAnimation(cxt, anim);
+		if(a!=null)
+		{
+			a.reset();
+		}
+		if(v!=null)
+		{
+			v.clearAnimation();
+			v.startAnimation(a);
+		}
+	}
+	public static void slideUp(Context cxt,View v,int anime)
+	{
+	
+		Animation a=AnimationUtils.loadAnimation(cxt,anime);
+		if(a!=null)
+		{
+			a.reset();
+		}
+		if(v!=null)
+		{
+			v.clearAnimation();
+			v.startAnimation(a);
+		}
+	}
 	public static void slideUp(Context cxt,View v)
 	{
 	
